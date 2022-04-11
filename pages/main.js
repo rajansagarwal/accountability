@@ -39,13 +39,13 @@ const callouts = [
     imageAlt: 'project hestia',
     href: 'https://www.youtube.com/watch?v=3HZJ7ZoQIUE&ab_channel=RajanAgarwal',
   },
-  /*{
+  {
     name: 'Flow Fields',
     description: 'Generative Art',
     imageSrc: 'https://file.heyrajan.com/art.png',
     imageAlt: 'project hestia',
     href: 'https://youtu.be/inOwByW_ufs',
-  },*/
+  },
   {
     name: "Children's Novel",
     description: 'Autism Awareness',
@@ -69,6 +69,50 @@ const callouts = [
   },
 ]
 
+const technical = [
+  {
+    name: 'Data Aggregation',
+    description: 'Decentralized Medical Network',
+    imageSrc: 'https://cloud-cssrzjtwc-hack-club-bot.vercel.app/0screen_shot_2022-03-11_at_8.53.59_pm.png',
+    imageAlt: 'bloom network.',
+    href: 'https://github.com/rajanwastaken/bloom',
+  },
+  {
+    name: 'Open Letter',
+    description: 'Custom Blockchain',
+    imageSrc: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80',
+    imageAlt: 'food bank.',
+    href: 'https://equity.towards.live',
+  },
+  {
+    name: 'Machine Learning',
+    description: 'Poem Synthesis & Visualization',
+    imageSrc: 'https://cloud-r2onbrszd-hack-club-bot.vercel.app/0image.png',
+    imageAlt: 'etheralism.',
+    href: 'https://instagram.com/towards.etherealism',
+  },
+  {
+    name: 'Reconciliation',
+    description: '160km Run For Hope',
+    imageSrc: 'https://cloud-e9m8zg3xl-hack-club-bot.vercel.app/0image.png',
+    imageAlt: 'run for hope.',
+    href: 'https://youtu.be/lOFpyvGaCP8',
+  },
+  {
+    name: "Children's Novel",
+    description: 'Autism Awareness',
+    imageSrc: 'https://cloud-16c6pal7a-hack-club-bot.vercel.app/0bookpost.png',
+    imageAlt: 'breaking barriers.',
+    href: 'https://book.heyrajan.com',
+  },
+  {
+    name: 'Digital Communities',
+    description: 'Indigenous Pipeline Infrastructure',
+    imageSrc: 'https://cloud-ra5alevdj-hack-club-bot.vercel.app/0screen_shot_2022-03-11_at_8.56.49_pm.png',
+    imageAlt: 'project hestia',
+    href: 'https://youtu.be/inOwByW_ufs',
+  },
+]
 
 
 const product = {
@@ -78,24 +122,20 @@ const product = {
   images: [
     {
       src: 'https://file.heyrajan.com/i-profile.jpg',
-      alt: 'Stay Woke Image 2',
+      alt: 'Two each of gray, white, and black shirts laying flat.',
     },
     {
       src: 'https://file.heyrajan.com/staywoke2.jpg',
-      alt: 'Stay Woke Image 1',
+      alt: 'Model wearing plain black basic tee.',
     },
     {
       src: 'https://file.heyrajan.com/ori3.png',
-      alt: 'Ori, the Aussiedoodle',
+      alt: 'Model wearing plain gray basic tee.',
     },
     {
-      src: 'https://file.heyrajan.com/clock-horizontal.png',
-      alt: 'Clock in Paris',
+      src: 'https://file.heyrajan.com/clock.jpg',
+      alt: 'Model wearing plain white basic tee.',
     },
-    {
-      src: 'https://file.heyrajan.com/monument.png',
-      alt: 'Church in Florence, Italy'
-    }
   ],
   colors: [
     { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -109,15 +149,16 @@ const product = {
   details:
     'rajan',
 }
+const reviews = { href: '#', average: 4, totalCount: 117 }
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Home() {
+export default function Main() {
 
 const [posts, setPosts] = useState([])
-const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     fetchPosts()
     const mySubscription = supabase
@@ -136,7 +177,8 @@ const [loading, setLoading] = useState(true)
     setPosts(data)
     setLoading(false)
   }
-
+  if (loading) return <p className="text-2xl">Loading ...</p>
+  if (!posts.length) return <p className="text-2xl">No posts.</p>
 
   return (
     <div className="bg-black">
@@ -144,22 +186,6 @@ const [loading, setLoading] = useState(true)
       <div className="lg:pt-6">
 
         <div className="lg:mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8 sm:hidden">
-        <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-              <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
-                className="w-full h-full object-center object-cover"
-              />
-            </div>
-            <div className="aspect-w-3 aspect-h-2 sm:overflow-hidden rounded-lg">
-              <img
-                src={product.images[4].src}
-                alt={product.images[4].alt}
-                className="w-full h-full object-center object-cover"
-              />
-            </div>
-          </div>
           <div className="aspect-w-3 aspect-h-4 lg:rounded-lg overflow-hidden lg:block">
             <img
               src={product.images[0].src}
@@ -167,12 +193,11 @@ const [loading, setLoading] = useState(true)
               className="w-full h-full object-center object-cover"
             />
           </div>
-    
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
               <img
-                src={product.images[3].src}
-                alt={product.images[3].alt}
+                src={product.images[1].src}
+                alt={product.images[1].alt}
                 className="w-full h-full object-center object-cover"
               />
             </div>
@@ -184,24 +209,31 @@ const [loading, setLoading] = useState(true)
               />
             </div>
           </div>
+          <div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
+            <img
+              src={product.images[3].src}
+              alt={product.images[3].alt}
+              className="w-full h-full object-center object-cover"
+            />
+          </div>
         </div>
 
         {/* Product info */}
         <div className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-800 lg:pr-8">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-100 sm:text-3xl pb-6">Hey, I&#39;m <b>Rajan</b></h1>
+            <h1 className="text-2xl font-bold tracking-tight text-gray-100 sm:text-3xl">Hey, I&#39;m <b>Rajan</b></h1>
           </div>
 
-          <div className="mt-4 lg:mt-0 lg:row-span-4">
-            <p className="text-2xl text-gray-100 font-bold  hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block pb-6">latest <u><Link href="writings">thoughts</Link></u></p>
+          <div className="mt-4 lg:mt-0 lg:row-span-3">
+            <p className="text-2xl text-gray-100 font-bold hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">latest <u><Link href="writings">thoughts</Link></u></p>
 
             <div className="mt-6 text-gray-200">
             {
         posts.map(post => (
           <Link key={post.id} href={`/posts/${post.id}`}>
             <a className="block border-black mt-6 pb-4">
-            <p className="text-2xl text-gray-200 pb-2 context">{post.title}</p>
-            <p className="text-md text-gray-400 context">{post.subtitle} | <span className='text-sm'>{post.inserted_at}</span></p>
+            <p className="text-2xl text-gray-200 pb-1">{post.title}</p>
+            <p className="text-md text-gray-400">{post.subtitle}</p>
             </a>
           </Link>)
         )
@@ -216,7 +248,7 @@ const [loading, setLoading] = useState(true)
             <div>
 
               <div className="space-y-6">
-                <p className="text-lg text-gray-200 context">{product.description}<br/><br/>
+                <p className="text-base text-gray-200">{product.description}<br/><br/>
                 currently, i&#39;m working on a <u>path <a href="https://towards.live">towards</a> atruistic tech</u>. i envision a future of actionable software & reciprocal automation, through a transparent technical revolution. here, i have created public policy petitions, a new form of poetic expression and idyllic biotech.
                 <br/><br/>
                 within organizations, i write curriculum infrastructure, design mental health resource access, inspire youth to code and work on the international public health crisis. in my community, i wrote a childrens novel for autism awareness and running 160km for indigenous reconciliation.
