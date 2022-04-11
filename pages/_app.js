@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { supabase } from '../api'
 import '../styles/globals.css'
@@ -18,6 +18,9 @@ function MyApp({ Component, pageProps }) {
   }
   return (
   <div>
+    <Head>
+      <meta name="theme-color" content="#000000"/>
+    </Head>
     <div>
       <Component {...pageProps} />
     </div>
