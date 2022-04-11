@@ -8,11 +8,13 @@ export default function Post({ post }) {
     return <div>Loading...</div>
   }
   return (
-    <div className="m-20">
+    <div className="mt-20" style={{
+        paddingLeft: '15%',
+    }}>
       <h1 className="text-4xl text-black mt-4 font-bold tracking-wide">{post.title}</h1>
       <p className="text-lg text-black font-mono font-light my-4">{post.subtitle}</p>
       <div className="mt-8">
-        <ReactMarkdown className='prose font-serif'>
+        <ReactMarkdown className='prose font-sans'>
         {post.content}
         </ReactMarkdown>
       </div>

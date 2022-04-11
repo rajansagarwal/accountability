@@ -33,7 +33,7 @@ export default function Home() {
         background: 'black'
     }}>
       <Head>
-        <title>Supablog</title>
+        <title>Rajan | Posts</title>
       </Head>
 
       <h1 className="text-3xl font-semibold tracking-wide mt-6 mb-2 font-mono text-white">Posts</h1>

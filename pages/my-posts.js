@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Head from 'next/head'
 import { supabase } from '../api'
 
 export default function MyPosts() {
@@ -29,6 +30,9 @@ export default function MyPosts() {
         paddingTop: '15vh',
         paddingRight: '15vw'
     }}>
+        <Head>
+            <title>Rajan | My Posts</title>
+        </Head>
       <h1 className="text-3xl font-semibold tracking-wide mt-6 mb-2">My Posts</h1>
       {
         posts.map((post, index) => (
