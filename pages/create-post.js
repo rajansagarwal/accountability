@@ -4,14 +4,13 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import "easymde/dist/easymde.min.css"
 import { supabase } from '../api'
-import Head from 'next/head'
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
 const initialState = { title: '', content: '', subtitle: '' }
 
-  const CreatePost = () => {
+function CreatePost() {
   const [post, setPost] = useState(initialState)
-  const [authorized, setAuthorized] = useState(false)
+  const [authorized, setAuthorized] = useState(true)
   const { title, content, subtitle } = post
   const router = useRouter()
   function onChange(e) {
@@ -20,28 +19,23 @@ const initialState = { title: '', content: '', subtitle: '' }
 
   const user = supabase.auth.user()
 
-    useEffect(() => {
-        if(user.email === 'rajan.ag005@gmail.com') {
-            setAuthorized(true)
-        }
-    })
-
+  useEffect(() => {
+    console.log(user)
+  }, [])
   
 
   async function createNewPost() {
     if (!title || !content) return
-    if(user.email === 'rajan.ag005@gmail.com') {
-        setAuthorized(true)
-    }
     const id = uuid()
     post.id = id
     const { data } = await supabase
       .from('posts')
       .insert([
-          { title, subtitle, content, user_id: user.id, user_email: user.email }
+          { title, subtitle, content, user_id: user.id, user_email: user.email, inserted_at:new Date(), slug }
       ])
       .single()
-    router.push(`/posts/${data.id}`)
+      
+    router.push(`/posts/${data.slug}`) 
   }
 
   return (
@@ -50,9 +44,6 @@ const initialState = { title: '', content: '', subtitle: '' }
         paddingTop: '15vh',
         paddingRight: '15vw'
     }}>
-        <Head>
-            <title>Create Post</title>
-        </Head>
     { authorized ? (
         <div>
       <h1 className="text-3xl font-semibold tracking-wide mt-6">Create new post</h1><br/>
@@ -68,6 +59,13 @@ const initialState = { title: '', content: '', subtitle: '' }
         name="subtitle"
         placeholder="Subtitle"
         value={post.subtitle}
+        className="border-b pb-2 text-md my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
+      /> 
+      <input
+        onChange={onChange}
+        name="slug"
+        placeholder="Slug Text"
+        value={post.slug}
         className="border-b pb-2 text-md my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
       /> 
       <SimpleMDE value={post.content} onChange={value => setPost({ ...post, content: value })} />
