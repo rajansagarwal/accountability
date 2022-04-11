@@ -9,7 +9,7 @@ import Head from 'next/head'
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false })
 const initialState = { title: '', content: '', subtitle: '' }
 
-function CreatePost() {
+  const CreatePost = () => {
   const [post, setPost] = useState(initialState)
   const [authorized, setAuthorized] = useState(false)
   const { title, content, subtitle } = post
@@ -17,9 +17,22 @@ function CreatePost() {
   function onChange(e) {
     setPost(() => ({ ...post, [e.target.name]: e.target.value }))
   }
+
+  const user = supabase.auth.user()
+
+    useEffect(() => {
+        if(user.email === 'rajan.ag005@gmail.com') {
+            setAuthorized(true)
+        }
+    })
+
+  
+
   async function createNewPost() {
     if (!title || !content) return
-    const user = supabase.auth.user()
+    if(user.email === 'rajan.ag005@gmail.com') {
+        setAuthorized(true)
+    }
     const id = uuid()
     post.id = id
     const { data } = await supabase
@@ -30,11 +43,6 @@ function CreatePost() {
       .single()
     router.push(`/posts/${data.id}`)
   }
-  useEffect(() => {
-    if (post.user_email == 'rajan.ag005@gmail.com' ) {
-        setAuthorized(true);
-    }
-  })
 
   return (
     <div style={{
