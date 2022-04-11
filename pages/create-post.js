@@ -63,13 +63,6 @@ function CreatePost() {
         value={post.subtitle}
         className="border-b pb-2 text-md my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
       /> 
-      <input
-        onChange={onChange}
-        name="slug"
-        placeholder="Slug Text"
-        value={post.slug}
-        className="border-b pb-2 text-md my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
-      /> 
       <SimpleMDE value={post.content} onChange={value => setPost({ ...post, content: value })} />
       <button
         type="button"
