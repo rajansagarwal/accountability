@@ -10,7 +10,7 @@ const initialState = { title: '', content: '', subtitle: '' }
 
 function CreatePost() {
   const [post, setPost] = useState(initialState)
-  const [authorized, setAuthorized] = useState(true)
+  const [authorized, setAuthorized] = useState(false)
   const { title, content, subtitle } = post
   const router = useRouter()
   function onChange(e) {
@@ -20,7 +20,9 @@ function CreatePost() {
   const user = supabase.auth.user()
 
   useEffect(() => {
-    console.log(user)
+    if (user?.email === 'rajan.ag005@gmail.com') {
+        setAuthorized(true)
+    }
   }, [])
   
 
